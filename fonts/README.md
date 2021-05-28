@@ -1,0 +1,1 @@
+Download the fonts from [google drive](https://drive.google.com/file/d/1yEKTmEmZkIIhBH-2MUzDpEVdy7Ge9pMS/view?usp=sharing) or [Baidu Cloud Disk]https://pan.baidu.com/s/1IqFRh9KOPCgkvO75mi-8aA) with password: 1iu1
