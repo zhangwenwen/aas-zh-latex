@@ -1,4 +1,4 @@
-\documentclass{aas}
+\documentclass[fontset=mac]{aas}
 \setcounter{page}{1}
 
 \begin{document}
@@ -94,8 +94,21 @@ papers for Acta Automatica Sinica. \textsl{Acta Automatica Sinica},
 
 %这一章为引言,无需写标题.
 
+
 本文是《自动化学报》中文稿件\LaTeX
 模版的一个样例和使用说明.模版的中文支持部分采用CCT.这一章为引言,无需写标题.
+
+\section{自动化模板改造说明}
+
+以前的模板假装在使用\LaTeX 便利性进行论文排版，存在如下问题：
+\begin{enumerate}
+	\item 首页结束位置需要根据实际的内容添加 one column or two columns进行手动微调，\textbf{这里我使用的解决办法是简单粗暴，把所有的分栏的都去掉，直接使用一个balance指令进行最后一页内容的对齐；}
+	\item 图表不能进行标号引用，手动调节，以前不使用的原因是因为，在手动双栏的时候，figure等添加的图像不显示，\textbf{在上条取消了two column就自然不存在问题了；}
+	\item 公式不能通栏，\textbf{直接放在一个可以通栏的figure* 里面；}
+	\item 显示的作者信息不是仿宋体，\textbf{直接使用ctex包进行替换；}
+\end{enumerate}
+
+还需要进行的是改造 参考文献部分，因为自动化学报使用的是中英文双语的参考文献，需要比较多的工作量，接下来方便的时候进行。
 
 \section{准备稿件}
 
@@ -118,12 +131,20 @@ papers for Acta Automatica Sinica. \textsl{Acta Automatica Sinica},
 \subsection{关于~{\bf section}~标题的写法}
 \end{verbatim}
 
+ 
+
 \subsection{中文支持及中英文混排}
 在您的\LaTeX 系统已经安装了\LaTeX
 中文字体的情况下,此模板支持六种中文字体,分别为宋体(song),仿宋体(fs),楷体(kai),
 黑体(hei),隶书(li)和幼圆(you),括号内为字体引用名称,具体可以参考aas.cls
 文件第64\,$\sim$\,69行. 当您编译\,.tex文件遇到类似以下的字体缺失警告时:
-\onecolumn\begin{multicols}{2}%这一行用于第一页末尾
+
+
+
+\balance
+%\onecolumn
+
+%\begin{multicols}{2}%这一行用于第一页末尾
 
 
 \begin{verbatim}
@@ -195,6 +216,21 @@ g}_{i-1}(r+\tau)]{\rm d}r\ i=1,2,\cdots \tag{2}
 可以用环境\verb|\end{multicols}| \verb|\begin{multicols}{2}|产生.
 
 \subsection{图表}
+这里添加新的图标用 figure 引用图片一下，如图~\ref{fig:thefirst}~所示.
+
+\begin{figure*}
+	\centering
+	\includegraphics[width=6cm]{01.eps}
+	\vskip 2mm%
+	\caption{熔化率与比例、积分系数之间的关系}
+	
+	\renewcommand{\figurename}{Fig.}
+	\addtocounter{figure}{-1}
+	\caption{Comparing melting rate with proportion and integral parameters of the Consarc controller}
+	\label{fig:thefirst}
+\end{figure*}
+
+这里是figure结束的位置
 
 \begin{center}
     \includegraphics[width=6cm]{01.eps}
@@ -262,12 +298,14 @@ book,可以输入``The \TeX book\verb|$^{[1]}$|''得到想要的效果``The
 \subsection{作者简介注意事项}
 
 文章末页需附作者中英文简介,简介不超过100字,包括作者姓名、职称、学习工作经历,以及研究方向.
+\begin{table*}
+\caption{这是一个通栏的表格示例}
+\renewcommand{\tablename}{Table}
+\addtocounter{table}{-1}
+\caption{An exampletable in one column}
 
-\end{multicols}%开始通栏显示
-\begin{center}
-\vbox{\centering{\small 表1\quad 这是一个通栏的表格示例
-\\
-Table 1 \quad An exampletable in one column } \vskip2mm
+
+\vskip2mm
 \renewcommand{\baselinestretch}{1.25}
 {\footnotesize\centerline{\tabcolsep=15pt\begin{tabular*}{\textwidth}{ccccc}
 \toprule
@@ -285,34 +323,40 @@ UTUtd                       &      10:0     &       70.7       &       29.3     
 WrightEagle2001             &       3:1     &       66.2       &       33.8       &          1.96          \\
 Average                     &               &       64.8       &       35.2       &          1.84          \\
 \bottomrule
-\end{tabular*}}}}\end{center}
-\vskip2mm\hrule\vskip2mm
-\begin{equation}
-T_{N-i}(m_{N-i})= \left[ \underbrace{O,\cdots,
-O}_{Z_1^{N-i}(m_{N-i})} \underbrace{I \cdot h^{N-i}(n^{N-i}), I
-\cdot h^{N-i}(n^{N-i}-1),\cdots, I \cdot
-h^{N-i}(m^{N-i})}_{L^{(N-i)}},\underbrace{O,\cdots,
-O}_{Z_2^{N-i}(m_{N-i})} \right]\tag{3}
-\end{equation}
-\begin{equation} \left[
-  \begin{array}{c}
-    \hat{{\pmb x}}(k+1) \\
-    {\pmb e}(k+1)\\
-  \end{array}
-\right]=\left[
-  \begin{array}{cc}
-    A_0+B_0F+L_o(C(k)-C_0) & L_oC(k) \\
-    (A(k)-A_0)+(B(k)-B_0)F-L_o(C(k)-C_0) & A(k)-L_oC(k) \\
-  \end{array}
-\right]\left[
-  \begin{array}{c}
-    \hat{{\pmb x}}(k) \\
-    {\pmb e} (k)\\
-  \end{array}
-\right]\tag{4}
-\end{equation}
+\end{tabular*}}}\end{table*}
+\begin{figure*}
+	\begin{equation}
+		T_{N-i}(m_{N-i})= \left[ \underbrace{O,\cdots,
+			O}_{Z_1^{N-i}(m_{N-i})} \underbrace{I \cdot h^{N-i}(n^{N-i}), I
+			\cdot h^{N-i}(n^{N-i}-1),\cdots, I \cdot
+			h^{N-i}(m^{N-i})}_{L^{(N-i)}},\underbrace{O,\cdots,
+			O}_{Z_2^{N-i}(m_{N-i})} \right]\tag{3}
+	\end{equation}
+\end{figure*}
+
+
+\begin{figure*}
+	\begin{align} 
+		\left[
+		\begin{array}{c}
+			\hat{{\pmb x}}(k+1) \\
+			{\pmb e}(k+1)\\
+		\end{array}
+		\right]=\left[
+		\begin{array}{cc}
+			A_0+B_0F+L_o(C(k)-C_0) & L_oC(k) \\
+			(A(k)-A_0)+(B(k)-B_0)F-L_o(C(k)-C_0) & A(k)-L_oC(k) \\
+		\end{array}
+		\right]\left[
+		\begin{array}{c}
+			\hat{{\pmb x}}(k) \\
+			{\pmb e} (k)\\
+		\end{array}
+		\right]\tag{4}
+	\end{align}
+\end{figure*}
 \vskip3mm
-\begin{multicols}{2}%开始双栏显示
+%\begin{multicols}{2}%开始双栏显示
 
 作者照片请选用简单背景的证件照片,比例要求是$5:4$,大小做成3.0\,cm\,$\times$\,2.4\,cm.
 
@@ -439,6 +483,6 @@ Copy-editor at the Editorial Office of
 Acta Automatica Sinica}. He received his bachelor degree from Beijing
 University of Technology in 2006. Corresponding author of this paper.)
 \end{biography}
-\end{multicols}
+%\end{multicols}
 
 \end{document}

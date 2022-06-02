@@ -32,6 +32,9 @@
 \RequirePackage{ifthen,calc}
 \RequirePackage{flushend}
 \RequirePackage{url}
+\RequirePackage{ctex}
+\RequirePackage{balance}
+\RequirePackage{stfloats}
 % tabular and figure
 \RequirePackage[config]{subfig}
 \RequirePackage{graphicx}
@@ -46,7 +49,7 @@
 \RequirePackage{bm}
 % Chinese
 \RequirePackage{times}
-\RequirePackage[CJKnumber,CJKchecksingle,no-math]{xeCJK}
+%\RequirePackage[CJKnumber,CJKchecksingle,no-math]{xeCJK}
 \RequirePackage{indentfirst}
 % bibliography (numbers, superscript, sorted)
 \RequirePackage[square,numbers,sort&compress,super]{natbib}
@@ -107,10 +110,10 @@
 \newcommand{\hei}{\CJKfamily{hei}}      % 黑体
 \newcommand{\kai}{\CJKfamily{kai}}      % 楷体
 \newcommand{\li}{\CJKfamily{kai}}       % 隶书
-\newcommand{\fs}{\CJKfamily{kai}}       % 仿宋体
+%\newcommand{\fs}{\CJKfamily{fangsong}}       % 仿宋体
 \newcommand{\you}{\CJKfamily{kai}}      % 幼圆
 \def\songti{\song}
-\def\fangsong{\fs}
+%\def\fangsong{\fs}
 \def\kaishu{\kai}
 \def\heiti{\hei}
 \def\lishu{\li}
@@ -193,7 +196,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%-------- maketitle --------%%
 \newcommand{\cntitle}[1]{\gdef\aas@cntitle{{\aas@zihao{2-}\hei #1}}}
-\newcommand{\cnauthor}[1]{\gdef\aas@cnauthor{{\aas@zihao{4-} \fs #1}}}
+\newcommand{\cnauthor}[1]{\gdef\aas@cnauthor{{\aas@zihao{4-} \fangsong #1}}}
 \newcommand{\doi}[1]{\gdef\aas@doi{{\noindent\small {\bf DOI}\quad #1}}}
 \newcommand{\cnabstract}[1]{\gdef\cnabstract{\noindent{\aas@zihao{5-}{\hei 摘\quad{}要}\quad #1}}}
 \newcommand{\cnkeyword}[1]{\gdef\cnkeyword{\noindent{\aas@zihao{5-}{\hei 关键词}\quad #1}}}
@@ -270,9 +273,10 @@
     {\centering%
     {\aas@cntitle\par}%
     {%\vskip 0.8em%
-    \vskip 0.8\baselineskip%
+    %\vskip 0.8\baselineskip%
      \begin{tabular}[t]{c}%
-     \aas@cnauthor%
+     \parbox[c]{\textwidth}{\center{\aas@cnauthor}}%
+     %
      \end{tabular}%
      \vskip 0.3em%
      \par%
@@ -290,9 +294,9 @@
     {\centering%
     {\aas@entitle\par}%
     {%\vskip 1.2em%
-    \vskip 0.5\baselineskip%
-    \begin{tabular}[t]{c}%
-    \aas@enauthor%
+    %\vskip 0.5\baselineskip%
+    \begin{tabular}[t]{c}
+    \parbox[c]{\textwidth}{\center{\aas@enauthor}}%
     \end{tabular}%
     \vskip 0.3em%
     \par%
